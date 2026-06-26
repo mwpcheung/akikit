@@ -1,0 +1,300 @@
+syntax = "proto3";
+
+package akiservice;
+
+option go_package = "github.com/mwpcheung/akikit;akikit";
+
+service AkiService {
+  rpc OpenSession(OpenSessionRequest) returns (Session);
+  rpc CloseSession(Session) returns (Empty);
+  rpc Ping(Session) returns (PingReply);
+  rpc Hubs(Empty) returns (HubsReply);
+
+  rpc Anisette(AnisetteRequest) returns (AnisetteReply);
+  rpc AnisetteProvisionStart(AnisetteProvisionStartRequest) returns (AnisetteProvisionStartReply);
+  rpc AnisetteProvisionEnd(AnisetteProvisionEndRequest) returns (AnisetteProvisionEndReply);
+  rpc AnisetteIsProvisioned(AnisetteRequest) returns (AnisetteStatusReply);
+  rpc AnisetteProvisionErase(AnisetteRequest) returns (AnisetteStatusReply);
+  rpc SetRoutingInfo(SetRoutingInfoRequest) returns (AnisetteProvisionEndReply);
+  rpc GetRoutingInfo(GetRoutingInfoRequest) returns (GetRoutingInfoReply);
+  rpc AnisetteSynchronize(AnisetteSynchronizeRequest) returns (AnisetteSynchronizeReply);
+  rpc LoginCode(LoginCodeRequest) returns (LoginCodeReply);
+
+  rpc SAPExchange(SAPExchangeRequest) returns (SAPExchangeReply);
+  rpc SAPSign(SAPSignRequest) returns (SAPSignReply);
+  rpc SAPPrimeSign(SAPSignRequest) returns (SAPSignReply);
+  rpc SAPVerify(SAPVerifyRequest) returns (SAPVerifyReply);
+  rpc SAPPrimeVerify(SAPVerifyRequest) returns (SAPVerifyReply);
+  rpc CloseSAPContext(CtxHandle) returns (Empty);
+
+
+  rpc SSVGetFairPlayContext(SSVGetContextRequest) returns (SSVGetContextReply);
+  rpc SSVIsValidContext(SSVContextHandle) returns (SSVIsValidContextReply);
+  rpc SSVSubscriptionBag(SSVSubBagRequest) returns (SSVSubBagReply);
+  rpc SSVSubscriptionRequest(SSVSubscriptionRequestRequest) returns (SSVSubscriptionRequestReply);
+  rpc SSVImportKeybag(SSVImportKeybagRequest) returns (SSVImportReply);
+  rpc SSVImportSubKeybag(SSVImportKeybagRequest) returns (SSVImportReply);
+  rpc SSVImportSubResponse(SSVImportSubResponseRequest) returns (SSVImportReply);
+  rpc SSVStopSubscriptionLease(SSVContextHandle) returns (Empty);
+  rpc SSVDestroyFairPlayContext(SSVContextHandle) returns (Empty);
+  rpc SSVKeyBagSyncData(SSVKeyBagSyncDataRequest) returns (SSVKeyBagSyncDataReply);
+
+  rpc QuickSign(QuickSignRequest) returns (QuickSignReply);
+
+  rpc RSASign(RSASignRequest) returns (RSASignReply);
+
+
+  rpc NACExchange1(NACExchange1Request) returns (NACExchange1Reply);
+  rpc NACExchange2(NACExchange2Request) returns (Empty);
+  rpc NACSign(NACSignRequest) returns (NACSignReply);
+  rpc CloseNACContext(CtxHandle) returns (Empty);
+}
+
+message CtxHandle {
+  string session = 1;
+  uint64 ctx = 2;
+}
+
+message Empty {}
+
+message Device {
+  string UDID = 1;
+  string SN = 2;
+  uint64 ECID = 3;
+  string IMEI = 4;
+  string WIFI = 5;
+  string BT = 6;
+  string ProductType = 7;
+  string OSVersion = 8;
+  string BuildVersion = 9;
+  bytes ADI = 10;
+  bytes SISV = 11;
+}
+
+message OpenSessionRequest {
+  Device device = 1;
+  bytes credentials = 2; // credentials from admin dashboard 
+}
+
+message HubProc {
+  uint32 id = 1;
+  string name = 2;
+}
+
+message Hub {
+  string session = 1;
+  string sn = 2;
+  string udid = 3;
+  string model = 4;
+  string redirect_dir = 5;
+  int64 idle_seconds = 6;
+  bool busy = 7;
+  repeated HubProc procs = 8;
+}
+
+message HubsReply {
+  repeated Hub hubs = 1;
+}
+
+message Session {
+  string id = 1;
+}
+
+message PingReply {
+  string instance_id = 1;
+  uint32 proc_count = 2;
+}
+
+message SSVKeyBagSyncDataRequest {
+  string session = 1;
+  int64 dsid = 2;
+  uint64 cval = 3;
+}
+
+message SSVKeyBagSyncDataReply {
+  bytes kbsync = 1;
+}
+
+message QuickSignRequest {
+  string session = 1;
+  bytes input = 2; // SHA1(message)
+}
+message QuickSignReply {
+  bytes output = 1; // 16 bytes
+  int32 return_code = 2;
+}
+
+message RSASignRequest {
+  string session = 1;
+  bytes data = 2; // tosign data any blob
+}
+message RSASignReply {
+  bytes signature = 1;   // RSA signature
+  bytes certificate = 2; // signing certificate
+}
+
+message AnisetteRequest {
+  string session = 1;
+  int64 dsid = 2;
+}
+message AnisetteReply {
+  bytes mid = 1;
+  bytes otp = 2;
+  uint64 rinfo = 3;
+}
+message AnisetteProvisionStartRequest {
+  string session = 1;
+  int64 dsid = 2;
+  bytes spim = 3;
+}
+message AnisetteProvisionStartReply {
+  bytes cpim = 1;
+  uint64 prov_session = 2;
+}
+message AnisetteProvisionEndRequest {
+  string session = 1;
+  uint64 prov_session = 2;
+  bytes ptm = 3;
+  bytes tk = 4;
+}
+message AnisetteProvisionEndReply {
+  bytes adi = 1; // adi.pb content after provisioning, for client persistence
+}
+message SetRoutingInfoRequest {
+  string session = 1;
+  int64 dsid = 2;
+  uint64 rinfo = 3; // RINFO from provisioning network response, stored in akd (setIDMSRoutingInfo)
+}
+message GetRoutingInfoRequest {
+  string session = 1;
+  int64 dsid = 2;
+}
+message GetRoutingInfoReply {
+  uint64 rinfo = 1; // IDMS routing info for the given dsid in akd (getIDMSRoutingInfo)
+}
+message AnisetteStatusReply {
+  int32 result = 1;
+}
+message AnisetteSynchronizeRequest {
+  string session = 1;
+  int64 dsid = 2;
+  bytes sim = 3;
+}
+message AnisetteSynchronizeReply {
+  bytes mid = 1;
+  bytes srm = 2;
+  bytes adi = 3;
+}
+
+message LoginCodeRequest {
+  string session = 1;
+  int64 dsid = 2; // machine's provisioned dsid, e.g., -2
+}
+message LoginCodeReply {
+  string code = 1; // secondary login code 6 digits
+}
+
+message SAPExchangeRequest {
+  string session = 1;
+  uint64 ctx = 4;
+  int32 version = 2;
+  bytes input = 3;
+}
+message SAPExchangeReply {
+  bytes output = 1;
+  int32 return_code = 2;
+  uint64 ctx = 3;
+}
+
+message SAPSignRequest {
+  string session = 1;
+  uint64 ctx = 3;
+  bytes data = 2;
+}
+message SAPSignReply {
+  bytes signature = 1;
+}
+
+message SAPVerifyRequest {
+  string session = 1;
+  uint64 ctx = 2;
+  bytes signature = 3;
+  bytes data = 4;
+}
+message SAPVerifyReply {
+  int32 return_code = 1;
+}
+
+message SSVGetContextRequest {
+  string session = 1;
+  string dir = 2;  // empty defaults to /var/mobile/Media/iTunes_Control/iTunes
+  bytes udid = 3;  // 20B;hwinfo = {IDLength=len(udid); udid} udid bytes not string
+}
+message SSVGetContextReply {
+  uint32 ctx_id = 1;
+}
+message SSVContextHandle {
+  string session = 1;
+  uint32 ctx_id = 2;
+}
+message SSVSubBagRequest {
+  string session = 1;
+  uint32 ctx_id = 2; // SSVGetFairPlayContext  context
+  int64 dsid = 3;
+  int32 transaction_type = 4;
+  bytes amdm = 5; // machineIDData = -1 AMD-M
+}
+message SSVSubBagReply {
+  bytes sbsync = 1;
+}
+
+message SSVIsValidContextReply {
+  bool valid = 1;
+}
+message SSVImportKeybagRequest {
+  string session = 1;
+  uint32 ctx_id = 2;
+  bytes data = 3;
+}
+message SSVImportReply {
+  bytes out = 1;
+}
+message SSVImportSubResponseRequest {
+  string session = 1;
+  uint32 ctx_id = 2;
+  bytes ckc = 3;     // PlaybackLeaseResponse CKCData
+  bytes sub_bag = 4; // PlaybackLeaseResponse subscriptionBagData
+}
+message SSVSubscriptionRequestRequest {
+  string session = 1;
+  uint32 ctx_id = 2;
+  int64 dsid = 3;
+  uint32 txn_type = 4; // 301 enable / 302 status / 303 disable
+  bytes cert = 5;      // fairPlayCertificate
+}
+message SSVSubscriptionRequestReply {
+  bytes spc = 1;
+  bytes sbsync = 2;
+}
+
+message NACExchange1Request {
+  string session = 1;
+  bytes cert = 2;
+}
+message NACExchange1Reply {
+  bytes reqbuf = 1;
+  uint64 ctx = 2;
+}
+message NACExchange2Request {
+  string session = 1;
+  uint64 ctx = 3;
+  bytes session_data = 2;
+}
+message NACSignRequest {
+  string session = 1;
+  uint64 ctx = 3;
+  bytes to_sign = 2;
+}
+message NACSignReply {
+  bytes signature = 1;
+}
