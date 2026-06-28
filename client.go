@@ -86,6 +86,10 @@ func (c *Client) AnisetteProvisionEnd(provSession uint64, ptm, tk []byte) ([]byt
 	return r.GetAdi(), nil
 }
 
+func (c *Client) LoginCode(dsid int64) (*LoginCodeReply, error) {
+	return c.cli.LoginCode(c.ctx, &LoginCodeRequest{Session: c.session, Dsid: dsid})
+}
+
 func (c *Client) SAPExchange(ctxh uint64, version int32, input []byte) (*SAPExchangeReply, error) {
 	return c.cli.SAPExchange(c.ctx, &SAPExchangeRequest{Session: c.session, Ctx: ctxh, Version: version, Input: input})
 }
