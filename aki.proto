@@ -10,14 +10,15 @@ service AkiService {
   rpc Ping(Session) returns (PingReply);
   rpc Hubs(Empty) returns (HubsReply);
 
-  rpc Anisette(AnisetteRequest) returns (AnisetteReply);
-  rpc AnisetteProvisionStart(AnisetteProvisionStartRequest) returns (AnisetteProvisionStartReply);
-  rpc AnisetteProvisionEnd(AnisetteProvisionEndRequest) returns (AnisetteProvisionEndReply);
-  rpc AnisetteIsProvisioned(AnisetteRequest) returns (AnisetteStatusReply);
-  rpc AnisetteProvisionErase(AnisetteRequest) returns (AnisetteStatusReply);
-  rpc SetRoutingInfo(SetRoutingInfoRequest) returns (AnisetteProvisionEndReply);
+  rpc RequestOTPForDSID(MachineRequest) returns (OtpReply); // ADIOTPRequest
+  rpc ProvisionStart(ProvisionStartRequest) returns (ProvisionStartReply);
+  rpc ProvisionEnd(ProvisionEndRequest) returns (ProvisionEndReply);
+  rpc IsProvisioned(MachineRequest) returns (StatusReply);
+  rpc ProvisionErase(MachineRequest) returns (StatusReply);
+  rpc Synchronize(SynchronizeRequest) returns (SynchronizeReply);
+  rpc ProvisionDestroy(ProvisionDestroyRequest) returns (StatusReply);
+  rpc SetRoutingInfo(SetRoutingInfoRequest) returns (ProvisionEndReply);
   rpc GetRoutingInfo(GetRoutingInfoRequest) returns (GetRoutingInfoReply);
-  rpc AnisetteSynchronize(AnisetteSynchronizeRequest) returns (AnisetteSynchronizeReply);
   rpc LoginCode(LoginCodeRequest) returns (LoginCodeReply);
 
   rpc SAPExchange(SAPExchangeRequest) returns (SAPExchangeReply);
@@ -25,29 +26,26 @@ service AkiService {
   rpc SAPPrimeSign(SAPSignRequest) returns (SAPSignReply);
   rpc SAPVerify(SAPVerifyRequest) returns (SAPVerifyReply);
   rpc SAPPrimeVerify(SAPVerifyRequest) returns (SAPVerifyReply);
-  rpc CloseSAPContext(CtxHandle) returns (Empty);
-
+  rpc SAPTeardown(CtxHandle) returns (Empty);
 
   rpc SSVGetFairPlayContext(SSVGetContextRequest) returns (SSVGetContextReply);
   rpc SSVIsValidContext(SSVContextHandle) returns (SSVIsValidContextReply);
   rpc SSVSubscriptionBag(SSVSubBagRequest) returns (SSVSubBagReply);
   rpc SSVSubscriptionRequest(SSVSubscriptionRequestRequest) returns (SSVSubscriptionRequestReply);
-  rpc SSVImportKeybag(SSVImportKeybagRequest) returns (SSVImportReply);
-  rpc SSVImportSubKeybag(SSVImportKeybagRequest) returns (SSVImportReply);
-  rpc SSVImportSubResponse(SSVImportSubResponseRequest) returns (SSVImportReply);
+  rpc SSVImportKeybag(SSVImportRequest) returns (SSVImportReply);
+  rpc SSVImportSubscriptionKeybag(SSVImportRequest) returns (SSVImportReply);
+  rpc SSVImportSubscriptionResponse(SSVImportSubResponseRequest) returns (SSVImportReply);
   rpc SSVStopSubscriptionLease(SSVContextHandle) returns (Empty);
-  rpc SSVDestroyFairPlayContext(SSVContextHandle) returns (Empty);
-  rpc SSVKeyBagSyncData(SSVKeyBagSyncDataRequest) returns (SSVKeyBagSyncDataReply);
+  rpc SSVFairplayDestroy(SSVContextHandle) returns (Empty);
+  rpc KeyBagData(KeyBagDataRequest) returns (KeyBagDataReply);
 
   rpc QuickSign(QuickSignRequest) returns (QuickSignReply);
-
   rpc RSASign(RSASignRequest) returns (RSASignReply);
 
-
-  rpc NACExchange1(NACExchange1Request) returns (NACExchange1Reply);
-  rpc NACExchange2(NACExchange2Request) returns (Empty);
-  rpc NACSign(NACSignRequest) returns (NACSignReply);
-  rpc CloseNACContext(CtxHandle) returns (Empty);
+  rpc AbsinExchange1(AbsinExchange1Request) returns (AbsinExchange1Reply);
+  rpc AbsinExchange2(AbsinExchange2Request) returns (Empty);
+  rpc AbsinSign(AbsinSignRequest) returns (AbsinSignReply);
+  rpc AbsinTeardown(CtxHandle) returns (Empty);
 }
 
 message CtxHandle {
@@ -73,7 +71,7 @@ message Device {
 
 message OpenSessionRequest {
   Device device = 1;
-  bytes credentials = 2; // credentials from admin dashboard 
+  bytes credentials = 2; // credentials from admin dashboard
 }
 
 message HubProc {
@@ -105,85 +103,61 @@ message PingReply {
   uint32 proc_count = 2;
 }
 
-message SSVKeyBagSyncDataRequest {
-  string session = 1;
-  int64 dsid = 2;
-  uint64 cval = 3;
-}
-
-message SSVKeyBagSyncDataReply {
-  bytes kbsync = 1;
-}
-
-message QuickSignRequest {
-  string session = 1;
-  bytes input = 2; // SHA1(message)
-}
-message QuickSignReply {
-  bytes output = 1; // 16 bytes
-  int32 return_code = 2;
-}
-
-message RSASignRequest {
-  string session = 1;
-  bytes data = 2; // tosign data any blob
-}
-message RSASignReply {
-  bytes signature = 1;   // RSA signature
-  bytes certificate = 2; // signing certificate
-}
-
-message AnisetteRequest {
+message MachineRequest {
   string session = 1;
   int64 dsid = 2;
 }
-message AnisetteReply {
+message OtpReply {
   bytes mid = 1;
   bytes otp = 2;
   uint64 rinfo = 3;
 }
-message AnisetteProvisionStartRequest {
+message ProvisionStartRequest {
   string session = 1;
   int64 dsid = 2;
   bytes spim = 3;
 }
-message AnisetteProvisionStartReply {
+message ProvisionStartReply {
   bytes cpim = 1;
   uint64 prov_session = 2;
 }
-message AnisetteProvisionEndRequest {
+message ProvisionEndRequest {
   string session = 1;
   uint64 prov_session = 2;
   bytes ptm = 3;
   bytes tk = 4;
 }
-message AnisetteProvisionEndReply {
+message ProvisionEndReply {
   bytes adi = 1; // adi.pb content after provisioning, for client persistence
+}
+message ProvisionDestroyRequest {
+  string session = 1;
+  uint64 prov_session = 2;
+}
+message SynchronizeRequest {
+  string session = 1;
+  int64 dsid = 2;
+  bytes sim = 3;
+}
+message SynchronizeReply {
+  bytes mid = 1;
+  bytes srm = 2;
+  bytes adi = 3; // adi.pb after sync, for client persistence
 }
 message SetRoutingInfoRequest {
   string session = 1;
   int64 dsid = 2;
-  uint64 rinfo = 3; // RINFO from provisioning network response, stored in akd (setIDMSRoutingInfo)
+  uint64 rinfo = 3; // RINFO from provisioning network response, stored via setIDMSRoutingInfo
 }
 message GetRoutingInfoRequest {
   string session = 1;
   int64 dsid = 2;
 }
 message GetRoutingInfoReply {
-  uint64 rinfo = 1; // IDMS routing info for the given dsid in akd (getIDMSRoutingInfo)
+  uint64 rinfo = 1; // IDMS routing info for the given dsid (getIDMSRoutingInfo)
 }
-message AnisetteStatusReply {
+message StatusReply {
   int32 result = 1;
-}
-message AnisetteSynchronizeRequest {
-  string session = 1;
-  int64 dsid = 2;
-  bytes sim = 3;
-}
-message AnisetteSynchronizeReply {
-  bytes mid = 1;
-  bytes srm = 2;
-  bytes adi = 3;
 }
 
 message LoginCodeRequest {
@@ -228,7 +202,7 @@ message SAPVerifyReply {
 message SSVGetContextRequest {
   string session = 1;
   string dir = 2;  // empty defaults to /var/mobile/Media/iTunes_Control/iTunes
-  bytes udid = 3;  // 20B;hwinfo = {IDLength=len(udid); udid} udid bytes not string
+  bytes udid = 3;  // 20B; hwinfo = {IDLength=len(udid); udid} udid bytes not string
 }
 message SSVGetContextReply {
   uint32 ctx_id = 1;
@@ -247,17 +221,16 @@ message SSVSubBagRequest {
 message SSVSubBagReply {
   bytes sbsync = 1;
 }
-
 message SSVIsValidContextReply {
   bool valid = 1;
 }
-message SSVImportKeybagRequest {
+message SSVImportRequest {
   string session = 1;
   uint32 ctx_id = 2;
-  bytes data = 3;
+  bytes input = 3;
 }
 message SSVImportReply {
-  bytes out = 1;
+  bytes output = 1;
 }
 message SSVImportSubResponseRequest {
   string session = 1;
@@ -269,32 +242,59 @@ message SSVSubscriptionRequestRequest {
   string session = 1;
   uint32 ctx_id = 2;
   int64 dsid = 3;
-  uint32 txn_type = 4; // 301 enable / 302 status / 303 disable
-  bytes cert = 5;      // fairPlayCertificate
+  uint32 transaction_type = 4; // 308 lease-start/download, 310 lease-renew
+  bytes cert = 5;              // fairPlayCertificate
 }
 message SSVSubscriptionRequestReply {
   bytes spc = 1;
   bytes sbsync = 2;
 }
 
-message NACExchange1Request {
+message KeyBagDataRequest {
+  string session = 1;
+  int64 dsid = 2;
+  uint64 cval = 3;
+}
+message KeyBagDataReply {
+  bytes keybag = 1;
+}
+
+message QuickSignRequest {
+  string session = 1;
+  bytes input = 2; // SHA1(message)
+}
+message QuickSignReply {
+  bytes output = 1; // 16 bytes
+  int32 return_code = 2;
+}
+
+message RSASignRequest {
+  string session = 1;
+  bytes data = 2; // tosign data any blob
+}
+message RSASignReply {
+  bytes signature = 1;   // RSA signature
+  bytes certificate = 2; // signing certificate
+}
+
+message AbsinExchange1Request {
   string session = 1;
   bytes cert = 2;
 }
-message NACExchange1Reply {
+message AbsinExchange1Reply {
   bytes reqbuf = 1;
   uint64 ctx = 2;
 }
-message NACExchange2Request {
+message AbsinExchange2Request {
   string session = 1;
   uint64 ctx = 3;
   bytes session_data = 2;
 }
-message NACSignRequest {
+message AbsinSignRequest {
   string session = 1;
   uint64 ctx = 3;
   bytes to_sign = 2;
 }
-message NACSignReply {
+message AbsinSignReply {
   bytes signature = 1;
 }

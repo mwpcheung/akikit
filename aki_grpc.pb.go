@@ -19,41 +19,42 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AkiService_OpenSession_FullMethodName               = "/akiservice.AkiService/OpenSession"
-	AkiService_CloseSession_FullMethodName              = "/akiservice.AkiService/CloseSession"
-	AkiService_Ping_FullMethodName                      = "/akiservice.AkiService/Ping"
-	AkiService_Hubs_FullMethodName                      = "/akiservice.AkiService/Hubs"
-	AkiService_Anisette_FullMethodName                  = "/akiservice.AkiService/Anisette"
-	AkiService_AnisetteProvisionStart_FullMethodName    = "/akiservice.AkiService/AnisetteProvisionStart"
-	AkiService_AnisetteProvisionEnd_FullMethodName      = "/akiservice.AkiService/AnisetteProvisionEnd"
-	AkiService_AnisetteIsProvisioned_FullMethodName     = "/akiservice.AkiService/AnisetteIsProvisioned"
-	AkiService_AnisetteProvisionErase_FullMethodName    = "/akiservice.AkiService/AnisetteProvisionErase"
-	AkiService_SetRoutingInfo_FullMethodName            = "/akiservice.AkiService/SetRoutingInfo"
-	AkiService_GetRoutingInfo_FullMethodName            = "/akiservice.AkiService/GetRoutingInfo"
-	AkiService_AnisetteSynchronize_FullMethodName       = "/akiservice.AkiService/AnisetteSynchronize"
-	AkiService_LoginCode_FullMethodName                 = "/akiservice.AkiService/LoginCode"
-	AkiService_SAPExchange_FullMethodName               = "/akiservice.AkiService/SAPExchange"
-	AkiService_SAPSign_FullMethodName                   = "/akiservice.AkiService/SAPSign"
-	AkiService_SAPPrimeSign_FullMethodName              = "/akiservice.AkiService/SAPPrimeSign"
-	AkiService_SAPVerify_FullMethodName                 = "/akiservice.AkiService/SAPVerify"
-	AkiService_SAPPrimeVerify_FullMethodName            = "/akiservice.AkiService/SAPPrimeVerify"
-	AkiService_CloseSAPContext_FullMethodName           = "/akiservice.AkiService/CloseSAPContext"
-	AkiService_SSVGetFairPlayContext_FullMethodName     = "/akiservice.AkiService/SSVGetFairPlayContext"
-	AkiService_SSVIsValidContext_FullMethodName         = "/akiservice.AkiService/SSVIsValidContext"
-	AkiService_SSVSubscriptionBag_FullMethodName        = "/akiservice.AkiService/SSVSubscriptionBag"
-	AkiService_SSVSubscriptionRequest_FullMethodName    = "/akiservice.AkiService/SSVSubscriptionRequest"
-	AkiService_SSVImportKeybag_FullMethodName           = "/akiservice.AkiService/SSVImportKeybag"
-	AkiService_SSVImportSubKeybag_FullMethodName        = "/akiservice.AkiService/SSVImportSubKeybag"
-	AkiService_SSVImportSubResponse_FullMethodName      = "/akiservice.AkiService/SSVImportSubResponse"
-	AkiService_SSVStopSubscriptionLease_FullMethodName  = "/akiservice.AkiService/SSVStopSubscriptionLease"
-	AkiService_SSVDestroyFairPlayContext_FullMethodName = "/akiservice.AkiService/SSVDestroyFairPlayContext"
-	AkiService_SSVKeyBagSyncData_FullMethodName         = "/akiservice.AkiService/SSVKeyBagSyncData"
-	AkiService_QuickSign_FullMethodName                 = "/akiservice.AkiService/QuickSign"
-	AkiService_RSASign_FullMethodName                   = "/akiservice.AkiService/RSASign"
-	AkiService_NACExchange1_FullMethodName              = "/akiservice.AkiService/NACExchange1"
-	AkiService_NACExchange2_FullMethodName              = "/akiservice.AkiService/NACExchange2"
-	AkiService_NACSign_FullMethodName                   = "/akiservice.AkiService/NACSign"
-	AkiService_CloseNACContext_FullMethodName           = "/akiservice.AkiService/CloseNACContext"
+	AkiService_OpenSession_FullMethodName                   = "/akiservice.AkiService/OpenSession"
+	AkiService_CloseSession_FullMethodName                  = "/akiservice.AkiService/CloseSession"
+	AkiService_Ping_FullMethodName                          = "/akiservice.AkiService/Ping"
+	AkiService_Hubs_FullMethodName                          = "/akiservice.AkiService/Hubs"
+	AkiService_RequestOTPForDSID_FullMethodName             = "/akiservice.AkiService/RequestOTPForDSID"
+	AkiService_ProvisionStart_FullMethodName                = "/akiservice.AkiService/ProvisionStart"
+	AkiService_ProvisionEnd_FullMethodName                  = "/akiservice.AkiService/ProvisionEnd"
+	AkiService_IsProvisioned_FullMethodName                 = "/akiservice.AkiService/IsProvisioned"
+	AkiService_ProvisionErase_FullMethodName                = "/akiservice.AkiService/ProvisionErase"
+	AkiService_Synchronize_FullMethodName                   = "/akiservice.AkiService/Synchronize"
+	AkiService_ProvisionDestroy_FullMethodName              = "/akiservice.AkiService/ProvisionDestroy"
+	AkiService_SetRoutingInfo_FullMethodName                = "/akiservice.AkiService/SetRoutingInfo"
+	AkiService_GetRoutingInfo_FullMethodName                = "/akiservice.AkiService/GetRoutingInfo"
+	AkiService_LoginCode_FullMethodName                     = "/akiservice.AkiService/LoginCode"
+	AkiService_SAPExchange_FullMethodName                   = "/akiservice.AkiService/SAPExchange"
+	AkiService_SAPSign_FullMethodName                       = "/akiservice.AkiService/SAPSign"
+	AkiService_SAPPrimeSign_FullMethodName                  = "/akiservice.AkiService/SAPPrimeSign"
+	AkiService_SAPVerify_FullMethodName                     = "/akiservice.AkiService/SAPVerify"
+	AkiService_SAPPrimeVerify_FullMethodName                = "/akiservice.AkiService/SAPPrimeVerify"
+	AkiService_SAPTeardown_FullMethodName                   = "/akiservice.AkiService/SAPTeardown"
+	AkiService_SSVGetFairPlayContext_FullMethodName         = "/akiservice.AkiService/SSVGetFairPlayContext"
+	AkiService_SSVIsValidContext_FullMethodName             = "/akiservice.AkiService/SSVIsValidContext"
+	AkiService_SSVSubscriptionBag_FullMethodName            = "/akiservice.AkiService/SSVSubscriptionBag"
+	AkiService_SSVSubscriptionRequest_FullMethodName        = "/akiservice.AkiService/SSVSubscriptionRequest"
+	AkiService_SSVImportKeybag_FullMethodName               = "/akiservice.AkiService/SSVImportKeybag"
+	AkiService_SSVImportSubscriptionKeybag_FullMethodName   = "/akiservice.AkiService/SSVImportSubscriptionKeybag"
+	AkiService_SSVImportSubscriptionResponse_FullMethodName = "/akiservice.AkiService/SSVImportSubscriptionResponse"
+	AkiService_SSVStopSubscriptionLease_FullMethodName      = "/akiservice.AkiService/SSVStopSubscriptionLease"
+	AkiService_SSVFairplayDestroy_FullMethodName            = "/akiservice.AkiService/SSVFairplayDestroy"
+	AkiService_KeyBagData_FullMethodName                    = "/akiservice.AkiService/KeyBagData"
+	AkiService_QuickSign_FullMethodName                     = "/akiservice.AkiService/QuickSign"
+	AkiService_RSASign_FullMethodName                       = "/akiservice.AkiService/RSASign"
+	AkiService_AbsinExchange1_FullMethodName                = "/akiservice.AkiService/AbsinExchange1"
+	AkiService_AbsinExchange2_FullMethodName                = "/akiservice.AkiService/AbsinExchange2"
+	AkiService_AbsinSign_FullMethodName                     = "/akiservice.AkiService/AbsinSign"
+	AkiService_AbsinTeardown_FullMethodName                 = "/akiservice.AkiService/AbsinTeardown"
 )
 
 // AkiServiceClient is the client API for AkiService service.
@@ -64,37 +65,38 @@ type AkiServiceClient interface {
 	CloseSession(ctx context.Context, in *Session, opts ...grpc.CallOption) (*Empty, error)
 	Ping(ctx context.Context, in *Session, opts ...grpc.CallOption) (*PingReply, error)
 	Hubs(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*HubsReply, error)
-	Anisette(ctx context.Context, in *AnisetteRequest, opts ...grpc.CallOption) (*AnisetteReply, error)
-	AnisetteProvisionStart(ctx context.Context, in *AnisetteProvisionStartRequest, opts ...grpc.CallOption) (*AnisetteProvisionStartReply, error)
-	AnisetteProvisionEnd(ctx context.Context, in *AnisetteProvisionEndRequest, opts ...grpc.CallOption) (*AnisetteProvisionEndReply, error)
-	AnisetteIsProvisioned(ctx context.Context, in *AnisetteRequest, opts ...grpc.CallOption) (*AnisetteStatusReply, error)
-	AnisetteProvisionErase(ctx context.Context, in *AnisetteRequest, opts ...grpc.CallOption) (*AnisetteStatusReply, error)
-	SetRoutingInfo(ctx context.Context, in *SetRoutingInfoRequest, opts ...grpc.CallOption) (*AnisetteProvisionEndReply, error)
+	RequestOTPForDSID(ctx context.Context, in *MachineRequest, opts ...grpc.CallOption) (*OtpReply, error)
+	ProvisionStart(ctx context.Context, in *ProvisionStartRequest, opts ...grpc.CallOption) (*ProvisionStartReply, error)
+	ProvisionEnd(ctx context.Context, in *ProvisionEndRequest, opts ...grpc.CallOption) (*ProvisionEndReply, error)
+	IsProvisioned(ctx context.Context, in *MachineRequest, opts ...grpc.CallOption) (*StatusReply, error)
+	ProvisionErase(ctx context.Context, in *MachineRequest, opts ...grpc.CallOption) (*StatusReply, error)
+	Synchronize(ctx context.Context, in *SynchronizeRequest, opts ...grpc.CallOption) (*SynchronizeReply, error)
+	ProvisionDestroy(ctx context.Context, in *ProvisionDestroyRequest, opts ...grpc.CallOption) (*StatusReply, error)
+	SetRoutingInfo(ctx context.Context, in *SetRoutingInfoRequest, opts ...grpc.CallOption) (*ProvisionEndReply, error)
 	GetRoutingInfo(ctx context.Context, in *GetRoutingInfoRequest, opts ...grpc.CallOption) (*GetRoutingInfoReply, error)
-	AnisetteSynchronize(ctx context.Context, in *AnisetteSynchronizeRequest, opts ...grpc.CallOption) (*AnisetteSynchronizeReply, error)
 	LoginCode(ctx context.Context, in *LoginCodeRequest, opts ...grpc.CallOption) (*LoginCodeReply, error)
 	SAPExchange(ctx context.Context, in *SAPExchangeRequest, opts ...grpc.CallOption) (*SAPExchangeReply, error)
 	SAPSign(ctx context.Context, in *SAPSignRequest, opts ...grpc.CallOption) (*SAPSignReply, error)
 	SAPPrimeSign(ctx context.Context, in *SAPSignRequest, opts ...grpc.CallOption) (*SAPSignReply, error)
 	SAPVerify(ctx context.Context, in *SAPVerifyRequest, opts ...grpc.CallOption) (*SAPVerifyReply, error)
 	SAPPrimeVerify(ctx context.Context, in *SAPVerifyRequest, opts ...grpc.CallOption) (*SAPVerifyReply, error)
-	CloseSAPContext(ctx context.Context, in *CtxHandle, opts ...grpc.CallOption) (*Empty, error)
+	SAPTeardown(ctx context.Context, in *CtxHandle, opts ...grpc.CallOption) (*Empty, error)
 	SSVGetFairPlayContext(ctx context.Context, in *SSVGetContextRequest, opts ...grpc.CallOption) (*SSVGetContextReply, error)
 	SSVIsValidContext(ctx context.Context, in *SSVContextHandle, opts ...grpc.CallOption) (*SSVIsValidContextReply, error)
 	SSVSubscriptionBag(ctx context.Context, in *SSVSubBagRequest, opts ...grpc.CallOption) (*SSVSubBagReply, error)
 	SSVSubscriptionRequest(ctx context.Context, in *SSVSubscriptionRequestRequest, opts ...grpc.CallOption) (*SSVSubscriptionRequestReply, error)
-	SSVImportKeybag(ctx context.Context, in *SSVImportKeybagRequest, opts ...grpc.CallOption) (*SSVImportReply, error)
-	SSVImportSubKeybag(ctx context.Context, in *SSVImportKeybagRequest, opts ...grpc.CallOption) (*SSVImportReply, error)
-	SSVImportSubResponse(ctx context.Context, in *SSVImportSubResponseRequest, opts ...grpc.CallOption) (*SSVImportReply, error)
+	SSVImportKeybag(ctx context.Context, in *SSVImportRequest, opts ...grpc.CallOption) (*SSVImportReply, error)
+	SSVImportSubscriptionKeybag(ctx context.Context, in *SSVImportRequest, opts ...grpc.CallOption) (*SSVImportReply, error)
+	SSVImportSubscriptionResponse(ctx context.Context, in *SSVImportSubResponseRequest, opts ...grpc.CallOption) (*SSVImportReply, error)
 	SSVStopSubscriptionLease(ctx context.Context, in *SSVContextHandle, opts ...grpc.CallOption) (*Empty, error)
-	SSVDestroyFairPlayContext(ctx context.Context, in *SSVContextHandle, opts ...grpc.CallOption) (*Empty, error)
-	SSVKeyBagSyncData(ctx context.Context, in *SSVKeyBagSyncDataRequest, opts ...grpc.CallOption) (*SSVKeyBagSyncDataReply, error)
+	SSVFairplayDestroy(ctx context.Context, in *SSVContextHandle, opts ...grpc.CallOption) (*Empty, error)
+	KeyBagData(ctx context.Context, in *KeyBagDataRequest, opts ...grpc.CallOption) (*KeyBagDataReply, error)
 	QuickSign(ctx context.Context, in *QuickSignRequest, opts ...grpc.CallOption) (*QuickSignReply, error)
 	RSASign(ctx context.Context, in *RSASignRequest, opts ...grpc.CallOption) (*RSASignReply, error)
-	NACExchange1(ctx context.Context, in *NACExchange1Request, opts ...grpc.CallOption) (*NACExchange1Reply, error)
-	NACExchange2(ctx context.Context, in *NACExchange2Request, opts ...grpc.CallOption) (*Empty, error)
-	NACSign(ctx context.Context, in *NACSignRequest, opts ...grpc.CallOption) (*NACSignReply, error)
-	CloseNACContext(ctx context.Context, in *CtxHandle, opts ...grpc.CallOption) (*Empty, error)
+	AbsinExchange1(ctx context.Context, in *AbsinExchange1Request, opts ...grpc.CallOption) (*AbsinExchange1Reply, error)
+	AbsinExchange2(ctx context.Context, in *AbsinExchange2Request, opts ...grpc.CallOption) (*Empty, error)
+	AbsinSign(ctx context.Context, in *AbsinSignRequest, opts ...grpc.CallOption) (*AbsinSignReply, error)
+	AbsinTeardown(ctx context.Context, in *CtxHandle, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type akiServiceClient struct {
@@ -145,59 +147,79 @@ func (c *akiServiceClient) Hubs(ctx context.Context, in *Empty, opts ...grpc.Cal
 	return out, nil
 }
 
-func (c *akiServiceClient) Anisette(ctx context.Context, in *AnisetteRequest, opts ...grpc.CallOption) (*AnisetteReply, error) {
+func (c *akiServiceClient) RequestOTPForDSID(ctx context.Context, in *MachineRequest, opts ...grpc.CallOption) (*OtpReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AnisetteReply)
-	err := c.cc.Invoke(ctx, AkiService_Anisette_FullMethodName, in, out, cOpts...)
+	out := new(OtpReply)
+	err := c.cc.Invoke(ctx, AkiService_RequestOTPForDSID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *akiServiceClient) AnisetteProvisionStart(ctx context.Context, in *AnisetteProvisionStartRequest, opts ...grpc.CallOption) (*AnisetteProvisionStartReply, error) {
+func (c *akiServiceClient) ProvisionStart(ctx context.Context, in *ProvisionStartRequest, opts ...grpc.CallOption) (*ProvisionStartReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AnisetteProvisionStartReply)
-	err := c.cc.Invoke(ctx, AkiService_AnisetteProvisionStart_FullMethodName, in, out, cOpts...)
+	out := new(ProvisionStartReply)
+	err := c.cc.Invoke(ctx, AkiService_ProvisionStart_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *akiServiceClient) AnisetteProvisionEnd(ctx context.Context, in *AnisetteProvisionEndRequest, opts ...grpc.CallOption) (*AnisetteProvisionEndReply, error) {
+func (c *akiServiceClient) ProvisionEnd(ctx context.Context, in *ProvisionEndRequest, opts ...grpc.CallOption) (*ProvisionEndReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AnisetteProvisionEndReply)
-	err := c.cc.Invoke(ctx, AkiService_AnisetteProvisionEnd_FullMethodName, in, out, cOpts...)
+	out := new(ProvisionEndReply)
+	err := c.cc.Invoke(ctx, AkiService_ProvisionEnd_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *akiServiceClient) AnisetteIsProvisioned(ctx context.Context, in *AnisetteRequest, opts ...grpc.CallOption) (*AnisetteStatusReply, error) {
+func (c *akiServiceClient) IsProvisioned(ctx context.Context, in *MachineRequest, opts ...grpc.CallOption) (*StatusReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AnisetteStatusReply)
-	err := c.cc.Invoke(ctx, AkiService_AnisetteIsProvisioned_FullMethodName, in, out, cOpts...)
+	out := new(StatusReply)
+	err := c.cc.Invoke(ctx, AkiService_IsProvisioned_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *akiServiceClient) AnisetteProvisionErase(ctx context.Context, in *AnisetteRequest, opts ...grpc.CallOption) (*AnisetteStatusReply, error) {
+func (c *akiServiceClient) ProvisionErase(ctx context.Context, in *MachineRequest, opts ...grpc.CallOption) (*StatusReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AnisetteStatusReply)
-	err := c.cc.Invoke(ctx, AkiService_AnisetteProvisionErase_FullMethodName, in, out, cOpts...)
+	out := new(StatusReply)
+	err := c.cc.Invoke(ctx, AkiService_ProvisionErase_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *akiServiceClient) SetRoutingInfo(ctx context.Context, in *SetRoutingInfoRequest, opts ...grpc.CallOption) (*AnisetteProvisionEndReply, error) {
+func (c *akiServiceClient) Synchronize(ctx context.Context, in *SynchronizeRequest, opts ...grpc.CallOption) (*SynchronizeReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AnisetteProvisionEndReply)
+	out := new(SynchronizeReply)
+	err := c.cc.Invoke(ctx, AkiService_Synchronize_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *akiServiceClient) ProvisionDestroy(ctx context.Context, in *ProvisionDestroyRequest, opts ...grpc.CallOption) (*StatusReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StatusReply)
+	err := c.cc.Invoke(ctx, AkiService_ProvisionDestroy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *akiServiceClient) SetRoutingInfo(ctx context.Context, in *SetRoutingInfoRequest, opts ...grpc.CallOption) (*ProvisionEndReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ProvisionEndReply)
 	err := c.cc.Invoke(ctx, AkiService_SetRoutingInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -209,16 +231,6 @@ func (c *akiServiceClient) GetRoutingInfo(ctx context.Context, in *GetRoutingInf
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetRoutingInfoReply)
 	err := c.cc.Invoke(ctx, AkiService_GetRoutingInfo_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *akiServiceClient) AnisetteSynchronize(ctx context.Context, in *AnisetteSynchronizeRequest, opts ...grpc.CallOption) (*AnisetteSynchronizeReply, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AnisetteSynchronizeReply)
-	err := c.cc.Invoke(ctx, AkiService_AnisetteSynchronize_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -285,10 +297,10 @@ func (c *akiServiceClient) SAPPrimeVerify(ctx context.Context, in *SAPVerifyRequ
 	return out, nil
 }
 
-func (c *akiServiceClient) CloseSAPContext(ctx context.Context, in *CtxHandle, opts ...grpc.CallOption) (*Empty, error) {
+func (c *akiServiceClient) SAPTeardown(ctx context.Context, in *CtxHandle, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, AkiService_CloseSAPContext_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AkiService_SAPTeardown_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -335,7 +347,7 @@ func (c *akiServiceClient) SSVSubscriptionRequest(ctx context.Context, in *SSVSu
 	return out, nil
 }
 
-func (c *akiServiceClient) SSVImportKeybag(ctx context.Context, in *SSVImportKeybagRequest, opts ...grpc.CallOption) (*SSVImportReply, error) {
+func (c *akiServiceClient) SSVImportKeybag(ctx context.Context, in *SSVImportRequest, opts ...grpc.CallOption) (*SSVImportReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SSVImportReply)
 	err := c.cc.Invoke(ctx, AkiService_SSVImportKeybag_FullMethodName, in, out, cOpts...)
@@ -345,20 +357,20 @@ func (c *akiServiceClient) SSVImportKeybag(ctx context.Context, in *SSVImportKey
 	return out, nil
 }
 
-func (c *akiServiceClient) SSVImportSubKeybag(ctx context.Context, in *SSVImportKeybagRequest, opts ...grpc.CallOption) (*SSVImportReply, error) {
+func (c *akiServiceClient) SSVImportSubscriptionKeybag(ctx context.Context, in *SSVImportRequest, opts ...grpc.CallOption) (*SSVImportReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SSVImportReply)
-	err := c.cc.Invoke(ctx, AkiService_SSVImportSubKeybag_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AkiService_SSVImportSubscriptionKeybag_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *akiServiceClient) SSVImportSubResponse(ctx context.Context, in *SSVImportSubResponseRequest, opts ...grpc.CallOption) (*SSVImportReply, error) {
+func (c *akiServiceClient) SSVImportSubscriptionResponse(ctx context.Context, in *SSVImportSubResponseRequest, opts ...grpc.CallOption) (*SSVImportReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SSVImportReply)
-	err := c.cc.Invoke(ctx, AkiService_SSVImportSubResponse_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AkiService_SSVImportSubscriptionResponse_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -375,20 +387,20 @@ func (c *akiServiceClient) SSVStopSubscriptionLease(ctx context.Context, in *SSV
 	return out, nil
 }
 
-func (c *akiServiceClient) SSVDestroyFairPlayContext(ctx context.Context, in *SSVContextHandle, opts ...grpc.CallOption) (*Empty, error) {
+func (c *akiServiceClient) SSVFairplayDestroy(ctx context.Context, in *SSVContextHandle, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, AkiService_SSVDestroyFairPlayContext_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AkiService_SSVFairplayDestroy_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *akiServiceClient) SSVKeyBagSyncData(ctx context.Context, in *SSVKeyBagSyncDataRequest, opts ...grpc.CallOption) (*SSVKeyBagSyncDataReply, error) {
+func (c *akiServiceClient) KeyBagData(ctx context.Context, in *KeyBagDataRequest, opts ...grpc.CallOption) (*KeyBagDataReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SSVKeyBagSyncDataReply)
-	err := c.cc.Invoke(ctx, AkiService_SSVKeyBagSyncData_FullMethodName, in, out, cOpts...)
+	out := new(KeyBagDataReply)
+	err := c.cc.Invoke(ctx, AkiService_KeyBagData_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -415,40 +427,40 @@ func (c *akiServiceClient) RSASign(ctx context.Context, in *RSASignRequest, opts
 	return out, nil
 }
 
-func (c *akiServiceClient) NACExchange1(ctx context.Context, in *NACExchange1Request, opts ...grpc.CallOption) (*NACExchange1Reply, error) {
+func (c *akiServiceClient) AbsinExchange1(ctx context.Context, in *AbsinExchange1Request, opts ...grpc.CallOption) (*AbsinExchange1Reply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(NACExchange1Reply)
-	err := c.cc.Invoke(ctx, AkiService_NACExchange1_FullMethodName, in, out, cOpts...)
+	out := new(AbsinExchange1Reply)
+	err := c.cc.Invoke(ctx, AkiService_AbsinExchange1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *akiServiceClient) NACExchange2(ctx context.Context, in *NACExchange2Request, opts ...grpc.CallOption) (*Empty, error) {
+func (c *akiServiceClient) AbsinExchange2(ctx context.Context, in *AbsinExchange2Request, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, AkiService_NACExchange2_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AkiService_AbsinExchange2_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *akiServiceClient) NACSign(ctx context.Context, in *NACSignRequest, opts ...grpc.CallOption) (*NACSignReply, error) {
+func (c *akiServiceClient) AbsinSign(ctx context.Context, in *AbsinSignRequest, opts ...grpc.CallOption) (*AbsinSignReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(NACSignReply)
-	err := c.cc.Invoke(ctx, AkiService_NACSign_FullMethodName, in, out, cOpts...)
+	out := new(AbsinSignReply)
+	err := c.cc.Invoke(ctx, AkiService_AbsinSign_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *akiServiceClient) CloseNACContext(ctx context.Context, in *CtxHandle, opts ...grpc.CallOption) (*Empty, error) {
+func (c *akiServiceClient) AbsinTeardown(ctx context.Context, in *CtxHandle, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, AkiService_CloseNACContext_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AkiService_AbsinTeardown_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -463,37 +475,38 @@ type AkiServiceServer interface {
 	CloseSession(context.Context, *Session) (*Empty, error)
 	Ping(context.Context, *Session) (*PingReply, error)
 	Hubs(context.Context, *Empty) (*HubsReply, error)
-	Anisette(context.Context, *AnisetteRequest) (*AnisetteReply, error)
-	AnisetteProvisionStart(context.Context, *AnisetteProvisionStartRequest) (*AnisetteProvisionStartReply, error)
-	AnisetteProvisionEnd(context.Context, *AnisetteProvisionEndRequest) (*AnisetteProvisionEndReply, error)
-	AnisetteIsProvisioned(context.Context, *AnisetteRequest) (*AnisetteStatusReply, error)
-	AnisetteProvisionErase(context.Context, *AnisetteRequest) (*AnisetteStatusReply, error)
-	SetRoutingInfo(context.Context, *SetRoutingInfoRequest) (*AnisetteProvisionEndReply, error)
+	RequestOTPForDSID(context.Context, *MachineRequest) (*OtpReply, error)
+	ProvisionStart(context.Context, *ProvisionStartRequest) (*ProvisionStartReply, error)
+	ProvisionEnd(context.Context, *ProvisionEndRequest) (*ProvisionEndReply, error)
+	IsProvisioned(context.Context, *MachineRequest) (*StatusReply, error)
+	ProvisionErase(context.Context, *MachineRequest) (*StatusReply, error)
+	Synchronize(context.Context, *SynchronizeRequest) (*SynchronizeReply, error)
+	ProvisionDestroy(context.Context, *ProvisionDestroyRequest) (*StatusReply, error)
+	SetRoutingInfo(context.Context, *SetRoutingInfoRequest) (*ProvisionEndReply, error)
 	GetRoutingInfo(context.Context, *GetRoutingInfoRequest) (*GetRoutingInfoReply, error)
-	AnisetteSynchronize(context.Context, *AnisetteSynchronizeRequest) (*AnisetteSynchronizeReply, error)
 	LoginCode(context.Context, *LoginCodeRequest) (*LoginCodeReply, error)
 	SAPExchange(context.Context, *SAPExchangeRequest) (*SAPExchangeReply, error)
 	SAPSign(context.Context, *SAPSignRequest) (*SAPSignReply, error)
 	SAPPrimeSign(context.Context, *SAPSignRequest) (*SAPSignReply, error)
 	SAPVerify(context.Context, *SAPVerifyRequest) (*SAPVerifyReply, error)
 	SAPPrimeVerify(context.Context, *SAPVerifyRequest) (*SAPVerifyReply, error)
-	CloseSAPContext(context.Context, *CtxHandle) (*Empty, error)
+	SAPTeardown(context.Context, *CtxHandle) (*Empty, error)
 	SSVGetFairPlayContext(context.Context, *SSVGetContextRequest) (*SSVGetContextReply, error)
 	SSVIsValidContext(context.Context, *SSVContextHandle) (*SSVIsValidContextReply, error)
 	SSVSubscriptionBag(context.Context, *SSVSubBagRequest) (*SSVSubBagReply, error)
 	SSVSubscriptionRequest(context.Context, *SSVSubscriptionRequestRequest) (*SSVSubscriptionRequestReply, error)
-	SSVImportKeybag(context.Context, *SSVImportKeybagRequest) (*SSVImportReply, error)
-	SSVImportSubKeybag(context.Context, *SSVImportKeybagRequest) (*SSVImportReply, error)
-	SSVImportSubResponse(context.Context, *SSVImportSubResponseRequest) (*SSVImportReply, error)
+	SSVImportKeybag(context.Context, *SSVImportRequest) (*SSVImportReply, error)
+	SSVImportSubscriptionKeybag(context.Context, *SSVImportRequest) (*SSVImportReply, error)
+	SSVImportSubscriptionResponse(context.Context, *SSVImportSubResponseRequest) (*SSVImportReply, error)
 	SSVStopSubscriptionLease(context.Context, *SSVContextHandle) (*Empty, error)
-	SSVDestroyFairPlayContext(context.Context, *SSVContextHandle) (*Empty, error)
-	SSVKeyBagSyncData(context.Context, *SSVKeyBagSyncDataRequest) (*SSVKeyBagSyncDataReply, error)
+	SSVFairplayDestroy(context.Context, *SSVContextHandle) (*Empty, error)
+	KeyBagData(context.Context, *KeyBagDataRequest) (*KeyBagDataReply, error)
 	QuickSign(context.Context, *QuickSignRequest) (*QuickSignReply, error)
 	RSASign(context.Context, *RSASignRequest) (*RSASignReply, error)
-	NACExchange1(context.Context, *NACExchange1Request) (*NACExchange1Reply, error)
-	NACExchange2(context.Context, *NACExchange2Request) (*Empty, error)
-	NACSign(context.Context, *NACSignRequest) (*NACSignReply, error)
-	CloseNACContext(context.Context, *CtxHandle) (*Empty, error)
+	AbsinExchange1(context.Context, *AbsinExchange1Request) (*AbsinExchange1Reply, error)
+	AbsinExchange2(context.Context, *AbsinExchange2Request) (*Empty, error)
+	AbsinSign(context.Context, *AbsinSignRequest) (*AbsinSignReply, error)
+	AbsinTeardown(context.Context, *CtxHandle) (*Empty, error)
 	mustEmbedUnimplementedAkiServiceServer()
 }
 
@@ -516,29 +529,32 @@ func (UnimplementedAkiServiceServer) Ping(context.Context, *Session) (*PingReply
 func (UnimplementedAkiServiceServer) Hubs(context.Context, *Empty) (*HubsReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Hubs not implemented")
 }
-func (UnimplementedAkiServiceServer) Anisette(context.Context, *AnisetteRequest) (*AnisetteReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Anisette not implemented")
+func (UnimplementedAkiServiceServer) RequestOTPForDSID(context.Context, *MachineRequest) (*OtpReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RequestOTPForDSID not implemented")
 }
-func (UnimplementedAkiServiceServer) AnisetteProvisionStart(context.Context, *AnisetteProvisionStartRequest) (*AnisetteProvisionStartReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AnisetteProvisionStart not implemented")
+func (UnimplementedAkiServiceServer) ProvisionStart(context.Context, *ProvisionStartRequest) (*ProvisionStartReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProvisionStart not implemented")
 }
-func (UnimplementedAkiServiceServer) AnisetteProvisionEnd(context.Context, *AnisetteProvisionEndRequest) (*AnisetteProvisionEndReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AnisetteProvisionEnd not implemented")
+func (UnimplementedAkiServiceServer) ProvisionEnd(context.Context, *ProvisionEndRequest) (*ProvisionEndReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProvisionEnd not implemented")
 }
-func (UnimplementedAkiServiceServer) AnisetteIsProvisioned(context.Context, *AnisetteRequest) (*AnisetteStatusReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AnisetteIsProvisioned not implemented")
+func (UnimplementedAkiServiceServer) IsProvisioned(context.Context, *MachineRequest) (*StatusReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IsProvisioned not implemented")
 }
-func (UnimplementedAkiServiceServer) AnisetteProvisionErase(context.Context, *AnisetteRequest) (*AnisetteStatusReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AnisetteProvisionErase not implemented")
+func (UnimplementedAkiServiceServer) ProvisionErase(context.Context, *MachineRequest) (*StatusReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProvisionErase not implemented")
 }
-func (UnimplementedAkiServiceServer) SetRoutingInfo(context.Context, *SetRoutingInfoRequest) (*AnisetteProvisionEndReply, error) {
+func (UnimplementedAkiServiceServer) Synchronize(context.Context, *SynchronizeRequest) (*SynchronizeReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Synchronize not implemented")
+}
+func (UnimplementedAkiServiceServer) ProvisionDestroy(context.Context, *ProvisionDestroyRequest) (*StatusReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProvisionDestroy not implemented")
+}
+func (UnimplementedAkiServiceServer) SetRoutingInfo(context.Context, *SetRoutingInfoRequest) (*ProvisionEndReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetRoutingInfo not implemented")
 }
 func (UnimplementedAkiServiceServer) GetRoutingInfo(context.Context, *GetRoutingInfoRequest) (*GetRoutingInfoReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRoutingInfo not implemented")
-}
-func (UnimplementedAkiServiceServer) AnisetteSynchronize(context.Context, *AnisetteSynchronizeRequest) (*AnisetteSynchronizeReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AnisetteSynchronize not implemented")
 }
 func (UnimplementedAkiServiceServer) LoginCode(context.Context, *LoginCodeRequest) (*LoginCodeReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginCode not implemented")
@@ -558,8 +574,8 @@ func (UnimplementedAkiServiceServer) SAPVerify(context.Context, *SAPVerifyReques
 func (UnimplementedAkiServiceServer) SAPPrimeVerify(context.Context, *SAPVerifyRequest) (*SAPVerifyReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SAPPrimeVerify not implemented")
 }
-func (UnimplementedAkiServiceServer) CloseSAPContext(context.Context, *CtxHandle) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CloseSAPContext not implemented")
+func (UnimplementedAkiServiceServer) SAPTeardown(context.Context, *CtxHandle) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SAPTeardown not implemented")
 }
 func (UnimplementedAkiServiceServer) SSVGetFairPlayContext(context.Context, *SSVGetContextRequest) (*SSVGetContextReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SSVGetFairPlayContext not implemented")
@@ -573,23 +589,23 @@ func (UnimplementedAkiServiceServer) SSVSubscriptionBag(context.Context, *SSVSub
 func (UnimplementedAkiServiceServer) SSVSubscriptionRequest(context.Context, *SSVSubscriptionRequestRequest) (*SSVSubscriptionRequestReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SSVSubscriptionRequest not implemented")
 }
-func (UnimplementedAkiServiceServer) SSVImportKeybag(context.Context, *SSVImportKeybagRequest) (*SSVImportReply, error) {
+func (UnimplementedAkiServiceServer) SSVImportKeybag(context.Context, *SSVImportRequest) (*SSVImportReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SSVImportKeybag not implemented")
 }
-func (UnimplementedAkiServiceServer) SSVImportSubKeybag(context.Context, *SSVImportKeybagRequest) (*SSVImportReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SSVImportSubKeybag not implemented")
+func (UnimplementedAkiServiceServer) SSVImportSubscriptionKeybag(context.Context, *SSVImportRequest) (*SSVImportReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SSVImportSubscriptionKeybag not implemented")
 }
-func (UnimplementedAkiServiceServer) SSVImportSubResponse(context.Context, *SSVImportSubResponseRequest) (*SSVImportReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SSVImportSubResponse not implemented")
+func (UnimplementedAkiServiceServer) SSVImportSubscriptionResponse(context.Context, *SSVImportSubResponseRequest) (*SSVImportReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SSVImportSubscriptionResponse not implemented")
 }
 func (UnimplementedAkiServiceServer) SSVStopSubscriptionLease(context.Context, *SSVContextHandle) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SSVStopSubscriptionLease not implemented")
 }
-func (UnimplementedAkiServiceServer) SSVDestroyFairPlayContext(context.Context, *SSVContextHandle) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SSVDestroyFairPlayContext not implemented")
+func (UnimplementedAkiServiceServer) SSVFairplayDestroy(context.Context, *SSVContextHandle) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SSVFairplayDestroy not implemented")
 }
-func (UnimplementedAkiServiceServer) SSVKeyBagSyncData(context.Context, *SSVKeyBagSyncDataRequest) (*SSVKeyBagSyncDataReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SSVKeyBagSyncData not implemented")
+func (UnimplementedAkiServiceServer) KeyBagData(context.Context, *KeyBagDataRequest) (*KeyBagDataReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method KeyBagData not implemented")
 }
 func (UnimplementedAkiServiceServer) QuickSign(context.Context, *QuickSignRequest) (*QuickSignReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QuickSign not implemented")
@@ -597,17 +613,17 @@ func (UnimplementedAkiServiceServer) QuickSign(context.Context, *QuickSignReques
 func (UnimplementedAkiServiceServer) RSASign(context.Context, *RSASignRequest) (*RSASignReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RSASign not implemented")
 }
-func (UnimplementedAkiServiceServer) NACExchange1(context.Context, *NACExchange1Request) (*NACExchange1Reply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NACExchange1 not implemented")
+func (UnimplementedAkiServiceServer) AbsinExchange1(context.Context, *AbsinExchange1Request) (*AbsinExchange1Reply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AbsinExchange1 not implemented")
 }
-func (UnimplementedAkiServiceServer) NACExchange2(context.Context, *NACExchange2Request) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NACExchange2 not implemented")
+func (UnimplementedAkiServiceServer) AbsinExchange2(context.Context, *AbsinExchange2Request) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AbsinExchange2 not implemented")
 }
-func (UnimplementedAkiServiceServer) NACSign(context.Context, *NACSignRequest) (*NACSignReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NACSign not implemented")
+func (UnimplementedAkiServiceServer) AbsinSign(context.Context, *AbsinSignRequest) (*AbsinSignReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AbsinSign not implemented")
 }
-func (UnimplementedAkiServiceServer) CloseNACContext(context.Context, *CtxHandle) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CloseNACContext not implemented")
+func (UnimplementedAkiServiceServer) AbsinTeardown(context.Context, *CtxHandle) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AbsinTeardown not implemented")
 }
 func (UnimplementedAkiServiceServer) mustEmbedUnimplementedAkiServiceServer() {}
 func (UnimplementedAkiServiceServer) testEmbeddedByValue()                    {}
@@ -702,92 +718,128 @@ func _AkiService_Hubs_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_Anisette_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AnisetteRequest)
+func _AkiService_RequestOTPForDSID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MachineRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).Anisette(ctx, in)
+		return srv.(AkiServiceServer).RequestOTPForDSID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_Anisette_FullMethodName,
+		FullMethod: AkiService_RequestOTPForDSID_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).Anisette(ctx, req.(*AnisetteRequest))
+		return srv.(AkiServiceServer).RequestOTPForDSID(ctx, req.(*MachineRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_AnisetteProvisionStart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AnisetteProvisionStartRequest)
+func _AkiService_ProvisionStart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProvisionStartRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).AnisetteProvisionStart(ctx, in)
+		return srv.(AkiServiceServer).ProvisionStart(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_AnisetteProvisionStart_FullMethodName,
+		FullMethod: AkiService_ProvisionStart_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).AnisetteProvisionStart(ctx, req.(*AnisetteProvisionStartRequest))
+		return srv.(AkiServiceServer).ProvisionStart(ctx, req.(*ProvisionStartRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_AnisetteProvisionEnd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AnisetteProvisionEndRequest)
+func _AkiService_ProvisionEnd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProvisionEndRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).AnisetteProvisionEnd(ctx, in)
+		return srv.(AkiServiceServer).ProvisionEnd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_AnisetteProvisionEnd_FullMethodName,
+		FullMethod: AkiService_ProvisionEnd_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).AnisetteProvisionEnd(ctx, req.(*AnisetteProvisionEndRequest))
+		return srv.(AkiServiceServer).ProvisionEnd(ctx, req.(*ProvisionEndRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_AnisetteIsProvisioned_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AnisetteRequest)
+func _AkiService_IsProvisioned_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MachineRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).AnisetteIsProvisioned(ctx, in)
+		return srv.(AkiServiceServer).IsProvisioned(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_AnisetteIsProvisioned_FullMethodName,
+		FullMethod: AkiService_IsProvisioned_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).AnisetteIsProvisioned(ctx, req.(*AnisetteRequest))
+		return srv.(AkiServiceServer).IsProvisioned(ctx, req.(*MachineRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_AnisetteProvisionErase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AnisetteRequest)
+func _AkiService_ProvisionErase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MachineRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).AnisetteProvisionErase(ctx, in)
+		return srv.(AkiServiceServer).ProvisionErase(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_AnisetteProvisionErase_FullMethodName,
+		FullMethod: AkiService_ProvisionErase_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).AnisetteProvisionErase(ctx, req.(*AnisetteRequest))
+		return srv.(AkiServiceServer).ProvisionErase(ctx, req.(*MachineRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AkiService_Synchronize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SynchronizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AkiServiceServer).Synchronize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AkiService_Synchronize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AkiServiceServer).Synchronize(ctx, req.(*SynchronizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AkiService_ProvisionDestroy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProvisionDestroyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AkiServiceServer).ProvisionDestroy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AkiService_ProvisionDestroy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AkiServiceServer).ProvisionDestroy(ctx, req.(*ProvisionDestroyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -824,24 +876,6 @@ func _AkiService_GetRoutingInfo_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AkiServiceServer).GetRoutingInfo(ctx, req.(*GetRoutingInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AkiService_AnisetteSynchronize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AnisetteSynchronizeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AkiServiceServer).AnisetteSynchronize(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AkiService_AnisetteSynchronize_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).AnisetteSynchronize(ctx, req.(*AnisetteSynchronizeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -954,20 +988,20 @@ func _AkiService_SAPPrimeVerify_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_CloseSAPContext_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AkiService_SAPTeardown_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CtxHandle)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).CloseSAPContext(ctx, in)
+		return srv.(AkiServiceServer).SAPTeardown(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_CloseSAPContext_FullMethodName,
+		FullMethod: AkiService_SAPTeardown_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).CloseSAPContext(ctx, req.(*CtxHandle))
+		return srv.(AkiServiceServer).SAPTeardown(ctx, req.(*CtxHandle))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1045,7 +1079,7 @@ func _AkiService_SSVSubscriptionRequest_Handler(srv interface{}, ctx context.Con
 }
 
 func _AkiService_SSVImportKeybag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SSVImportKeybagRequest)
+	in := new(SSVImportRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1057,43 +1091,43 @@ func _AkiService_SSVImportKeybag_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: AkiService_SSVImportKeybag_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).SSVImportKeybag(ctx, req.(*SSVImportKeybagRequest))
+		return srv.(AkiServiceServer).SSVImportKeybag(ctx, req.(*SSVImportRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_SSVImportSubKeybag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SSVImportKeybagRequest)
+func _AkiService_SSVImportSubscriptionKeybag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SSVImportRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).SSVImportSubKeybag(ctx, in)
+		return srv.(AkiServiceServer).SSVImportSubscriptionKeybag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_SSVImportSubKeybag_FullMethodName,
+		FullMethod: AkiService_SSVImportSubscriptionKeybag_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).SSVImportSubKeybag(ctx, req.(*SSVImportKeybagRequest))
+		return srv.(AkiServiceServer).SSVImportSubscriptionKeybag(ctx, req.(*SSVImportRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_SSVImportSubResponse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AkiService_SSVImportSubscriptionResponse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SSVImportSubResponseRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).SSVImportSubResponse(ctx, in)
+		return srv.(AkiServiceServer).SSVImportSubscriptionResponse(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_SSVImportSubResponse_FullMethodName,
+		FullMethod: AkiService_SSVImportSubscriptionResponse_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).SSVImportSubResponse(ctx, req.(*SSVImportSubResponseRequest))
+		return srv.(AkiServiceServer).SSVImportSubscriptionResponse(ctx, req.(*SSVImportSubResponseRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1116,38 +1150,38 @@ func _AkiService_SSVStopSubscriptionLease_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_SSVDestroyFairPlayContext_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AkiService_SSVFairplayDestroy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SSVContextHandle)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).SSVDestroyFairPlayContext(ctx, in)
+		return srv.(AkiServiceServer).SSVFairplayDestroy(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_SSVDestroyFairPlayContext_FullMethodName,
+		FullMethod: AkiService_SSVFairplayDestroy_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).SSVDestroyFairPlayContext(ctx, req.(*SSVContextHandle))
+		return srv.(AkiServiceServer).SSVFairplayDestroy(ctx, req.(*SSVContextHandle))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_SSVKeyBagSyncData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SSVKeyBagSyncDataRequest)
+func _AkiService_KeyBagData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(KeyBagDataRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).SSVKeyBagSyncData(ctx, in)
+		return srv.(AkiServiceServer).KeyBagData(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_SSVKeyBagSyncData_FullMethodName,
+		FullMethod: AkiService_KeyBagData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).SSVKeyBagSyncData(ctx, req.(*SSVKeyBagSyncDataRequest))
+		return srv.(AkiServiceServer).KeyBagData(ctx, req.(*KeyBagDataRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1188,74 +1222,74 @@ func _AkiService_RSASign_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_NACExchange1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NACExchange1Request)
+func _AkiService_AbsinExchange1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AbsinExchange1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).NACExchange1(ctx, in)
+		return srv.(AkiServiceServer).AbsinExchange1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_NACExchange1_FullMethodName,
+		FullMethod: AkiService_AbsinExchange1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).NACExchange1(ctx, req.(*NACExchange1Request))
+		return srv.(AkiServiceServer).AbsinExchange1(ctx, req.(*AbsinExchange1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_NACExchange2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NACExchange2Request)
+func _AkiService_AbsinExchange2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AbsinExchange2Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).NACExchange2(ctx, in)
+		return srv.(AkiServiceServer).AbsinExchange2(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_NACExchange2_FullMethodName,
+		FullMethod: AkiService_AbsinExchange2_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).NACExchange2(ctx, req.(*NACExchange2Request))
+		return srv.(AkiServiceServer).AbsinExchange2(ctx, req.(*AbsinExchange2Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_NACSign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NACSignRequest)
+func _AkiService_AbsinSign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AbsinSignRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).NACSign(ctx, in)
+		return srv.(AkiServiceServer).AbsinSign(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_NACSign_FullMethodName,
+		FullMethod: AkiService_AbsinSign_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).NACSign(ctx, req.(*NACSignRequest))
+		return srv.(AkiServiceServer).AbsinSign(ctx, req.(*AbsinSignRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AkiService_CloseNACContext_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AkiService_AbsinTeardown_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CtxHandle)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AkiServiceServer).CloseNACContext(ctx, in)
+		return srv.(AkiServiceServer).AbsinTeardown(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AkiService_CloseNACContext_FullMethodName,
+		FullMethod: AkiService_AbsinTeardown_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AkiServiceServer).CloseNACContext(ctx, req.(*CtxHandle))
+		return srv.(AkiServiceServer).AbsinTeardown(ctx, req.(*CtxHandle))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1284,24 +1318,32 @@ var AkiService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AkiService_Hubs_Handler,
 		},
 		{
-			MethodName: "Anisette",
-			Handler:    _AkiService_Anisette_Handler,
+			MethodName: "RequestOTPForDSID",
+			Handler:    _AkiService_RequestOTPForDSID_Handler,
 		},
 		{
-			MethodName: "AnisetteProvisionStart",
-			Handler:    _AkiService_AnisetteProvisionStart_Handler,
+			MethodName: "ProvisionStart",
+			Handler:    _AkiService_ProvisionStart_Handler,
 		},
 		{
-			MethodName: "AnisetteProvisionEnd",
-			Handler:    _AkiService_AnisetteProvisionEnd_Handler,
+			MethodName: "ProvisionEnd",
+			Handler:    _AkiService_ProvisionEnd_Handler,
 		},
 		{
-			MethodName: "AnisetteIsProvisioned",
-			Handler:    _AkiService_AnisetteIsProvisioned_Handler,
+			MethodName: "IsProvisioned",
+			Handler:    _AkiService_IsProvisioned_Handler,
 		},
 		{
-			MethodName: "AnisetteProvisionErase",
-			Handler:    _AkiService_AnisetteProvisionErase_Handler,
+			MethodName: "ProvisionErase",
+			Handler:    _AkiService_ProvisionErase_Handler,
+		},
+		{
+			MethodName: "Synchronize",
+			Handler:    _AkiService_Synchronize_Handler,
+		},
+		{
+			MethodName: "ProvisionDestroy",
+			Handler:    _AkiService_ProvisionDestroy_Handler,
 		},
 		{
 			MethodName: "SetRoutingInfo",
@@ -1310,10 +1352,6 @@ var AkiService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRoutingInfo",
 			Handler:    _AkiService_GetRoutingInfo_Handler,
-		},
-		{
-			MethodName: "AnisetteSynchronize",
-			Handler:    _AkiService_AnisetteSynchronize_Handler,
 		},
 		{
 			MethodName: "LoginCode",
@@ -1340,8 +1378,8 @@ var AkiService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AkiService_SAPPrimeVerify_Handler,
 		},
 		{
-			MethodName: "CloseSAPContext",
-			Handler:    _AkiService_CloseSAPContext_Handler,
+			MethodName: "SAPTeardown",
+			Handler:    _AkiService_SAPTeardown_Handler,
 		},
 		{
 			MethodName: "SSVGetFairPlayContext",
@@ -1364,24 +1402,24 @@ var AkiService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AkiService_SSVImportKeybag_Handler,
 		},
 		{
-			MethodName: "SSVImportSubKeybag",
-			Handler:    _AkiService_SSVImportSubKeybag_Handler,
+			MethodName: "SSVImportSubscriptionKeybag",
+			Handler:    _AkiService_SSVImportSubscriptionKeybag_Handler,
 		},
 		{
-			MethodName: "SSVImportSubResponse",
-			Handler:    _AkiService_SSVImportSubResponse_Handler,
+			MethodName: "SSVImportSubscriptionResponse",
+			Handler:    _AkiService_SSVImportSubscriptionResponse_Handler,
 		},
 		{
 			MethodName: "SSVStopSubscriptionLease",
 			Handler:    _AkiService_SSVStopSubscriptionLease_Handler,
 		},
 		{
-			MethodName: "SSVDestroyFairPlayContext",
-			Handler:    _AkiService_SSVDestroyFairPlayContext_Handler,
+			MethodName: "SSVFairplayDestroy",
+			Handler:    _AkiService_SSVFairplayDestroy_Handler,
 		},
 		{
-			MethodName: "SSVKeyBagSyncData",
-			Handler:    _AkiService_SSVKeyBagSyncData_Handler,
+			MethodName: "KeyBagData",
+			Handler:    _AkiService_KeyBagData_Handler,
 		},
 		{
 			MethodName: "QuickSign",
@@ -1392,20 +1430,20 @@ var AkiService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AkiService_RSASign_Handler,
 		},
 		{
-			MethodName: "NACExchange1",
-			Handler:    _AkiService_NACExchange1_Handler,
+			MethodName: "AbsinExchange1",
+			Handler:    _AkiService_AbsinExchange1_Handler,
 		},
 		{
-			MethodName: "NACExchange2",
-			Handler:    _AkiService_NACExchange2_Handler,
+			MethodName: "AbsinExchange2",
+			Handler:    _AkiService_AbsinExchange2_Handler,
 		},
 		{
-			MethodName: "NACSign",
-			Handler:    _AkiService_NACSign_Handler,
+			MethodName: "AbsinSign",
+			Handler:    _AkiService_AbsinSign_Handler,
 		},
 		{
-			MethodName: "CloseNACContext",
-			Handler:    _AkiService_CloseNACContext_Handler,
+			MethodName: "AbsinTeardown",
+			Handler:    _AkiService_AbsinTeardown_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

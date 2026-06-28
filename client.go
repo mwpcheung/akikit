@@ -54,16 +54,20 @@ func (c *Client) CloseSession() error {
 	return err
 }
 
-func (c *Client) Anisette(dsid int64) (*AnisetteReply, error) {
-	return c.cli.Anisette(c.ctx, &AnisetteRequest{Session: c.session, Dsid: dsid})
+func (c *Client) RequestOTPForDSID(dsid int64) (*OtpReply, error) {
+	return c.cli.RequestOTPForDSID(c.ctx, &MachineRequest{Session: c.session, Dsid: dsid})
 }
 
-func (c *Client) AnisetteIsProvisioned(dsid int64) (*AnisetteStatusReply, error) {
-	return c.cli.AnisetteIsProvisioned(c.ctx, &AnisetteRequest{Session: c.session, Dsid: dsid})
+func (c *Client) IsProvisioned(dsid int64) (*StatusReply, error) {
+	return c.cli.IsProvisioned(c.ctx, &MachineRequest{Session: c.session, Dsid: dsid})
 }
 
-func (c *Client) AnisetteSynchronize(dsid int64, sim []byte) (*AnisetteSynchronizeReply, error) {
-	return c.cli.AnisetteSynchronize(c.ctx, &AnisetteSynchronizeRequest{Session: c.session, Dsid: dsid, Sim: sim})
+func (c *Client) ProvisionErase(dsid int64) (*StatusReply, error) {
+	return c.cli.ProvisionErase(c.ctx, &MachineRequest{Session: c.session, Dsid: dsid})
+}
+
+func (c *Client) Synchronize(dsid int64, sim []byte) (*SynchronizeReply, error) {
+	return c.cli.Synchronize(c.ctx, &SynchronizeRequest{Session: c.session, Dsid: dsid, Sim: sim})
 }
 
 func (c *Client) SetRoutingInfo(dsid int64, rinfo uint64) ([]byte, error) {
@@ -74,16 +78,28 @@ func (c *Client) SetRoutingInfo(dsid int64, rinfo uint64) ([]byte, error) {
 	return r.GetAdi(), nil
 }
 
-func (c *Client) AnisetteProvisionStart(dsid int64, spim []byte) (*AnisetteProvisionStartReply, error) {
-	return c.cli.AnisetteProvisionStart(c.ctx, &AnisetteProvisionStartRequest{Session: c.session, Dsid: dsid, Spim: spim})
+func (c *Client) GetRoutingInfo(dsid int64) (uint64, error) {
+	r, err := c.cli.GetRoutingInfo(c.ctx, &GetRoutingInfoRequest{Session: c.session, Dsid: dsid})
+	if err != nil {
+		return 0, err
+	}
+	return r.GetRinfo(), nil
 }
 
-func (c *Client) AnisetteProvisionEnd(provSession uint64, ptm, tk []byte) ([]byte, error) {
-	r, err := c.cli.AnisetteProvisionEnd(c.ctx, &AnisetteProvisionEndRequest{Session: c.session, ProvSession: provSession, Ptm: ptm, Tk: tk})
+func (c *Client) ProvisionStart(dsid int64, spim []byte) (*ProvisionStartReply, error) {
+	return c.cli.ProvisionStart(c.ctx, &ProvisionStartRequest{Session: c.session, Dsid: dsid, Spim: spim})
+}
+
+func (c *Client) ProvisionEnd(provSession uint64, ptm, tk []byte) ([]byte, error) {
+	r, err := c.cli.ProvisionEnd(c.ctx, &ProvisionEndRequest{Session: c.session, ProvSession: provSession, Ptm: ptm, Tk: tk})
 	if err != nil {
 		return nil, err
 	}
 	return r.GetAdi(), nil
+}
+
+func (c *Client) ProvisionDestroy(provSession uint64) (*StatusReply, error) {
+	return c.cli.ProvisionDestroy(c.ctx, &ProvisionDestroyRequest{Session: c.session, ProvSession: provSession})
 }
 
 func (c *Client) LoginCode(dsid int64) (*LoginCodeReply, error) {
@@ -112,31 +128,31 @@ func (c *Client) SAPPrimeVerify(ctxh uint64, sig, data []byte) error {
 	return err
 }
 
-func (c *Client) CloseSAPContext(ctxh uint64) error {
-	_, err := c.cli.CloseSAPContext(c.ctx, &CtxHandle{Session: c.session, Ctx: ctxh})
+func (c *Client) SAPTeardown(ctxh uint64) error {
+	_, err := c.cli.SAPTeardown(c.ctx, &CtxHandle{Session: c.session, Ctx: ctxh})
 	return err
 }
 
-func (c *Client) NACExchange1(cert []byte) (*NACExchange1Reply, error) {
-	return c.cli.NACExchange1(c.ctx, &NACExchange1Request{Session: c.session, Cert: cert})
+func (c *Client) AbsinExchange1(cert []byte) (*AbsinExchange1Reply, error) {
+	return c.cli.AbsinExchange1(c.ctx, &AbsinExchange1Request{Session: c.session, Cert: cert})
 }
 
-func (c *Client) NACExchange2(ctxh uint64, sessionData []byte) error {
-	_, err := c.cli.NACExchange2(c.ctx, &NACExchange2Request{Session: c.session, Ctx: ctxh, SessionData: sessionData})
+func (c *Client) AbsinExchange2(ctxh uint64, sessionData []byte) error {
+	_, err := c.cli.AbsinExchange2(c.ctx, &AbsinExchange2Request{Session: c.session, Ctx: ctxh, SessionData: sessionData})
 	return err
 }
 
-func (c *Client) NACSign(ctxh uint64, toSign []byte) (*NACSignReply, error) {
-	return c.cli.NACSign(c.ctx, &NACSignRequest{Session: c.session, Ctx: ctxh, ToSign: toSign})
+func (c *Client) AbsinSign(ctxh uint64, toSign []byte) (*AbsinSignReply, error) {
+	return c.cli.AbsinSign(c.ctx, &AbsinSignRequest{Session: c.session, Ctx: ctxh, ToSign: toSign})
 }
 
-func (c *Client) CloseNACContext(ctxh uint64) error {
-	_, err := c.cli.CloseNACContext(c.ctx, &CtxHandle{Session: c.session, Ctx: ctxh})
+func (c *Client) AbsinTeardown(ctxh uint64) error {
+	_, err := c.cli.AbsinTeardown(c.ctx, &CtxHandle{Session: c.session, Ctx: ctxh})
 	return err
 }
 
-func (c *Client) SSVKeyBagSyncData(dsid int64, cval uint64) (*SSVKeyBagSyncDataReply, error) {
-	return c.cli.SSVKeyBagSyncData(c.ctx, &SSVKeyBagSyncDataRequest{Session: c.session, Dsid: dsid, Cval: cval})
+func (c *Client) KeyBagData(dsid int64, cval uint64) (*KeyBagDataReply, error) {
+	return c.cli.KeyBagData(c.ctx, &KeyBagDataRequest{Session: c.session, Dsid: dsid, Cval: cval})
 }
 
 func (c *Client) QuickSign(input []byte) (*QuickSignReply, error) {
@@ -160,19 +176,19 @@ func (c *Client) SSVIsValidContext(ctxID uint32) (*SSVIsValidContextReply, error
 }
 
 func (c *Client) SSVSubscriptionRequest(ctxID uint32, dsid int64, txnType uint32, cert []byte) (*SSVSubscriptionRequestReply, error) {
-	return c.cli.SSVSubscriptionRequest(c.ctx, &SSVSubscriptionRequestRequest{Session: c.session, CtxId: ctxID, Dsid: dsid, TxnType: txnType, Cert: cert})
+	return c.cli.SSVSubscriptionRequest(c.ctx, &SSVSubscriptionRequestRequest{Session: c.session, CtxId: ctxID, Dsid: dsid, TransactionType: txnType, Cert: cert})
 }
 
 func (c *Client) SSVImportKeybag(ctxID uint32, data []byte) (*SSVImportReply, error) {
-	return c.cli.SSVImportKeybag(c.ctx, &SSVImportKeybagRequest{Session: c.session, CtxId: ctxID, Data: data})
+	return c.cli.SSVImportKeybag(c.ctx, &SSVImportRequest{Session: c.session, CtxId: ctxID, Input: data})
 }
 
-func (c *Client) SSVImportSubKeybag(ctxID uint32, data []byte) (*SSVImportReply, error) {
-	return c.cli.SSVImportSubKeybag(c.ctx, &SSVImportKeybagRequest{Session: c.session, CtxId: ctxID, Data: data})
+func (c *Client) SSVImportSubscriptionKeybag(ctxID uint32, data []byte) (*SSVImportReply, error) {
+	return c.cli.SSVImportSubscriptionKeybag(c.ctx, &SSVImportRequest{Session: c.session, CtxId: ctxID, Input: data})
 }
 
-func (c *Client) SSVImportSubResponse(ctxID uint32, ckc, subBag []byte) (*SSVImportReply, error) {
-	return c.cli.SSVImportSubResponse(c.ctx, &SSVImportSubResponseRequest{Session: c.session, CtxId: ctxID, Ckc: ckc, SubBag: subBag})
+func (c *Client) SSVImportSubscriptionResponse(ctxID uint32, ckc, subBag []byte) (*SSVImportReply, error) {
+	return c.cli.SSVImportSubscriptionResponse(c.ctx, &SSVImportSubResponseRequest{Session: c.session, CtxId: ctxID, Ckc: ckc, SubBag: subBag})
 }
 
 func (c *Client) SSVStopSubscriptionLease(ctxID uint32) error {
@@ -180,7 +196,7 @@ func (c *Client) SSVStopSubscriptionLease(ctxID uint32) error {
 	return err
 }
 
-func (c *Client) SSVDestroyFairPlayContext(ctxID uint32) error {
-	_, err := c.cli.SSVDestroyFairPlayContext(c.ctx, &SSVContextHandle{Session: c.session, CtxId: ctxID})
+func (c *Client) SSVFairplayDestroy(ctxID uint32) error {
+	_, err := c.cli.SSVFairplayDestroy(c.ctx, &SSVContextHandle{Session: c.session, CtxId: ctxID})
 	return err
 }
