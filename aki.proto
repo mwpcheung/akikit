@@ -74,8 +74,8 @@ message Device {
 message MacDevice {
   string SN = 1;
   string UDID = 2;         // IOPlatformUUID, also the ADI machine UUID
-  string ProductType = 3;
-  string ProductName = 4;  // defaults to ProductType
+  string ProductType = 3;  // iOS-era alias for the model id; used only if ProductName is empty
+  string ProductName = 4;  // model, from IOKit product-name/model (macOS-native); e.g. "iMac20,1" — authoritative
   string BoardID = 5;
   string OSVersion = 6;
   string BuildVersion = 7;

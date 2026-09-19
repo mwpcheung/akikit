@@ -248,9 +248,9 @@ type MacDevice struct {
 	unknownFields protoimpl.UnknownFields
 
 	SN           string `protobuf:"bytes,1,opt,name=SN,proto3" json:"SN,omitempty"`
-	UDID         string `protobuf:"bytes,2,opt,name=UDID,proto3" json:"UDID,omitempty"` // IOPlatformUUID, also the ADI machine UUID
-	ProductType  string `protobuf:"bytes,3,opt,name=ProductType,proto3" json:"ProductType,omitempty"`
-	ProductName  string `protobuf:"bytes,4,opt,name=ProductName,proto3" json:"ProductName,omitempty"` // defaults to ProductType
+	UDID         string `protobuf:"bytes,2,opt,name=UDID,proto3" json:"UDID,omitempty"`               // IOPlatformUUID, also the ADI machine UUID
+	ProductType  string `protobuf:"bytes,3,opt,name=ProductType,proto3" json:"ProductType,omitempty"` // iOS-era alias for the model id; used only if ProductName is empty
+	ProductName  string `protobuf:"bytes,4,opt,name=ProductName,proto3" json:"ProductName,omitempty"` // model, from IOKit product-name/model (macOS-native); e.g. "iMac20,1" — authoritative
 	BoardID      string `protobuf:"bytes,5,opt,name=BoardID,proto3" json:"BoardID,omitempty"`
 	OSVersion    string `protobuf:"bytes,6,opt,name=OSVersion,proto3" json:"OSVersion,omitempty"`
 	BuildVersion string `protobuf:"bytes,7,opt,name=BuildVersion,proto3" json:"BuildVersion,omitempty"`
