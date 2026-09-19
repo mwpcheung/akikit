@@ -80,7 +80,7 @@ message MacDevice {
   string OSVersion = 6;
   string BuildVersion = 7;
   string MLB = 8;
-  bytes ROM = 9;           // 6 raw bytes
+  bytes ROM = 9;           // 6 raw bytes, same as MAC on a real Mac; either one fills the other
   string MAC = 10;         // macAddress,  aa:bb:cc:dd:ee:ff
   string DISKUUID = 11;
   bytes ADI = 12;          // MADI archive, returned by ProvisionEnd/Synchronize

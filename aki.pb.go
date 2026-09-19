@@ -255,7 +255,7 @@ type MacDevice struct {
 	OSVersion    string `protobuf:"bytes,6,opt,name=OSVersion,proto3" json:"OSVersion,omitempty"`
 	BuildVersion string `protobuf:"bytes,7,opt,name=BuildVersion,proto3" json:"BuildVersion,omitempty"`
 	MLB          string `protobuf:"bytes,8,opt,name=MLB,proto3" json:"MLB,omitempty"`
-	ROM          []byte `protobuf:"bytes,9,opt,name=ROM,proto3" json:"ROM,omitempty"`  // 6 raw bytes
+	ROM          []byte `protobuf:"bytes,9,opt,name=ROM,proto3" json:"ROM,omitempty"`  // 6 raw bytes, same as MAC on a real Mac; either one fills the other
 	MAC          string `protobuf:"bytes,10,opt,name=MAC,proto3" json:"MAC,omitempty"` // macAddress,  aa:bb:cc:dd:ee:ff
 	DISKUUID     string `protobuf:"bytes,11,opt,name=DISKUUID,proto3" json:"DISKUUID,omitempty"`
 	ADI          []byte `protobuf:"bytes,12,opt,name=ADI,proto3" json:"ADI,omitempty"` // MADI archive, returned by ProvisionEnd/Synchronize
