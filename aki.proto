@@ -55,6 +55,7 @@ message CtxHandle {
 
 message Empty {}
 
+// iOS device info
 message Device {
   string UDID = 1;
   string SN = 2;
@@ -65,13 +66,30 @@ message Device {
   string ProductType = 7;
   string OSVersion = 8;
   string BuildVersion = 9;
-  bytes ADI = 10;
+  bytes ADI = 10;  // adi.pb, returned by ProvisionEnd/Synchronize for client persistence
   bytes SISV = 11;
+}
+
+// for intel macos
+message MacDevice {
+  string SN = 1;
+  string UDID = 2;         // IOPlatformUUID, also the ADI machine UUID
+  string ProductType = 3;
+  string ProductName = 4;  // defaults to ProductType
+  string BoardID = 5;
+  string OSVersion = 6;
+  string BuildVersion = 7;
+  string MLB = 8;
+  bytes ROM = 9;           // 6 raw bytes
+  string MAC = 10;         // macAddress,  aa:bb:cc:dd:ee:ff
+  string DISKUUID = 11;
+  bytes ADI = 12;          // MADI archive, returned by ProvisionEnd/Synchronize
 }
 
 message OpenSessionRequest {
   Device device = 1;
-  bytes credentials = 2; // credentials from admin dashboard
+  bytes credentials = 2;    // credentials from admin dashboard
+  MacDevice mac_device = 3; // set instead of `device` for a macOS session
 }
 
 message HubProc {
@@ -96,6 +114,18 @@ message HubsReply {
 
 message Session {
   string id = 1;
+  reserved 2;
+  MacKeys mac_keys = 3; // macOS OpenSession output
+}
+
+// IOPower keys the kernel routine derives from MacDevice; output only, recomputed
+// per session, so clients need not store them.
+message MacKeys {
+  bytes Gq3489ugfi = 1;   // from SN
+  bytes Fyp98tpgj = 2;    // from UDID
+  bytes kbjfrfpoJU = 3;   // from DISKUUID
+  bytes oycqAZloTNDm = 4; // from ROM
+  bytes abKPld1EcMni = 5; // from MLB
 }
 
 message PingReply {

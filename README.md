@@ -53,6 +53,28 @@ ex, _ := client.SAPExchange(0, version, input)
 sig, _ := client.SAPSign(ex.Ctx, data)
 ```
 
+For an Intel macOS target, dial with `MacDevice` instead. The service derives the
+IOPower hardware keys from those fields and returns them with the session; they are
+output only, so there is nothing to persist and send back:
+
+```go
+client, closeFn, err := akikit.DialMac(ctx, "host:port", &akikit.MacDevice{
+    SN:          "...",
+    UDID:        "...", // IOPlatformUUID
+    ProductType: "MacBookPro15,1",
+    BoardID:     "Mac-...",
+    MLB:         "...",
+    ROM:         rom, // 6 raw bytes
+    MAC:         "aa:bb:cc:dd:ee:ff",
+    DISKUUID:    "...",
+})
+...
+keys := client.MacKeys()
+```
+
+Every `MacDevice` field is optional; unset ones fall back to a built-in profile.
+All other RPCs are identical across platforms.
+
 A session is opened per device (`OpenSession`) and must be closed when done
 (`CloseSession`). Context-handle resources (SAP / Absin / SSV) should be torn down
 with their respective `*Teardown` / `*Destroy` calls.
