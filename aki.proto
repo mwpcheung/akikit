@@ -86,10 +86,20 @@ message MacDevice {
   bytes ADI = 12;          // MADI archive, returned by ProvisionEnd/Synchronize
 }
 
+// Android runs Apple Music for Android's native .so security stack; same AkiService
+// surface, its own small identity.
+message AndroidDevice {
+  string android_id = 1; // Settings.Secure ANDROID_ID (SSAID): ADI identity + DeviceGUID F4
+  string serial = 2;     // ro.serialno: DeviceGUID F1 + DeviceID seed
+  bytes ADI = 3;         // adi.pb (in: restore; returned by ProvisionEnd/Synchronize)
+  string guid = 4;       // FairPlay DeviceGUID; authoritative value is computed server-side
+}
+
 message OpenSessionRequest {
   Device device = 1;
   bytes credentials = 2;    // credentials from admin dashboard
-  MacDevice mac_device = 3; // set instead of `device` for a macOS session
+  MacDevice mac_device = 3;         // set instead of `device` for a macOS session
+  AndroidDevice android_device = 4; // set instead of `device` for an Android session
 }
 
 message HubProc {
@@ -115,7 +125,8 @@ message HubsReply {
 message Session {
   string id = 1;
   reserved 2;
-  MacKeys mac_keys = 3; // macOS OpenSession output
+  MacKeys mac_keys = 3;      // macOS OpenSession output
+  string android_guid = 4;   // Android OpenSession output: computed FairPlay DeviceGUID
 }
 
 // IOPower keys the kernel routine derives from MacDevice; output only, recomputed
