@@ -96,7 +96,7 @@ message AndroidDevice {
 }
 
 message OpenSessionRequest {
-  Device device = 1;
+  Device device = 1; // iOS device info
   bytes credentials = 2;    // credentials from admin dashboard
   MacDevice mac_device = 3;         // set instead of `device` for a macOS session
   AndroidDevice android_device = 4; // set instead of `device` for an Android session

@@ -455,7 +455,7 @@ type OpenSessionRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Device        *Device        `protobuf:"bytes,1,opt,name=device,proto3" json:"device,omitempty"`
+	Device        *Device        `protobuf:"bytes,1,opt,name=device,proto3" json:"device,omitempty"`                                    // iOS device info
 	Credentials   []byte         `protobuf:"bytes,2,opt,name=credentials,proto3" json:"credentials,omitempty"`                          // credentials from admin dashboard
 	MacDevice     *MacDevice     `protobuf:"bytes,3,opt,name=mac_device,json=macDevice,proto3" json:"mac_device,omitempty"`             // set instead of `device` for a macOS session
 	AndroidDevice *AndroidDevice `protobuf:"bytes,4,opt,name=android_device,json=androidDevice,proto3" json:"android_device,omitempty"` // set instead of `device` for an Android session
