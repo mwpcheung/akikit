@@ -73,7 +73,21 @@ keys := client.MacKeys()
 ```
 
 Every `MacDevice` field is optional; unset ones fall back to a built-in profile.
-All other RPCs are identical across platforms.
+
+For Android (Apple Music for Android's native stack) dial with `AndroidDevice`; the
+service computes the FairPlay DeviceGUID and returns it on the session:
+
+```go
+client, closeFn, err := akikit.DialAndroid(ctx, "host:port", &akikit.AndroidDevice{
+    AndroidId: "...", // Settings.Secure ANDROID_ID
+    Serial:    "...", // ro.serialno
+    ADI:       adi,   // adi.pb, if previously provisioned
+})
+...
+guid := client.AndroidGUID()
+```
+
+All other RPCs are identical across platforms (Absin/NAC is not wired on Android yet).
 
 A session is opened per device (`OpenSession`) and must be closed when done
 (`CloseSession`). Context-handle resources (SAP / Absin / SSV) should be torn down

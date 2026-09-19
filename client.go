@@ -40,11 +40,29 @@ func DialMac(ctx context.Context, addr string, dev *MacDevice, opts ...grpc.Dial
 	return c, func() { c.CloseSession(); conn.Close() }, nil
 }
 
+func DialAndroid(ctx context.Context, addr string, dev *AndroidDevice, opts ...grpc.DialOption) (*Client, func(), error) {
+	dialOpts := append([]grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}, opts...)
+	conn, err := grpc.NewClient(addr, dialOpts...)
+	if err != nil {
+		return nil, nil, err
+	}
+	c := New(ctx, NewAkiServiceClient(conn))
+	s, err := c.cli.OpenSession(ctx, &OpenSessionRequest{AndroidDevice: dev})
+	if err != nil {
+		conn.Close()
+		return nil, nil, err
+	}
+	c.session = s.GetId()
+	c.androidGuid = s.GetAndroidGuid()
+	return c, func() { c.CloseSession(); conn.Close() }, nil
+}
+
 type Client struct {
-	cli     AkiServiceClient
-	ctx     context.Context
-	session string
-	macKeys *MacKeys
+	cli         AkiServiceClient
+	ctx         context.Context
+	session     string
+	macKeys     *MacKeys
+	androidGuid string
 }
 
 func New(ctx context.Context, cli AkiServiceClient) *Client {
@@ -58,6 +76,7 @@ func NewWithSession(ctx context.Context, cli AkiServiceClient, session string) *
 func (c *Client) Raw() AkiServiceClient { return c.cli }
 func (c *Client) Session() string       { return c.session }
 func (c *Client) MacKeys() *MacKeys     { return c.macKeys }
+func (c *Client) AndroidGUID() string   { return c.androidGuid }
 
 func (c *Client) OpenSession() (string, error) {
 	s, err := c.cli.OpenSession(c.ctx, &OpenSessionRequest{})
